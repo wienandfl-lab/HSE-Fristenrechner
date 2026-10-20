@@ -146,7 +146,7 @@ function texteAnmeldung(anmeldung, f) {
 // ---------------------------------------------------------------------------
 // Seite aktualisieren
 // ---------------------------------------------------------------------------
-const AMPEL_NAME = { gruen: 'Grüner Bereich', gelb: 'Gelber Bereich', rot: 'Roter Bereich' };
+const AMPEL_NAME = { gruen: '', gelb: '', rot: 'Achtung:' };
 
 const el = {
   option: document.getElementById('option'),
