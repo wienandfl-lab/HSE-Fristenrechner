@@ -146,7 +146,7 @@ function texteAnmeldung(anmeldung, f) {
 // ---------------------------------------------------------------------------
 // Seite aktualisieren
 // ---------------------------------------------------------------------------
-const AMPEL_NAME = { gruen: '', gelb: '', rot: 'Achtung:' };
+const AMPEL_NAME = { gruen: 'Grüner Bereich', gelb: 'Gelber Bereich', rot: 'Roter Bereich:' };
 
 const el = {
   option: document.getElementById('option'),
@@ -203,7 +203,7 @@ function berechne() {
   const [farbe, absaetze] = art === 'anmeldung' ? texteAnmeldung(eingabe, f) : texteAbgabe(eingabe, f);
 
   el.ergebnis.className = farbe;
-  el.ergebnis.innerHTML = `<p class="ampel">${AMPEL_NAME[farbe]} · Ref-Start Januar ${f.jahr + 1}</p>`
+  el.ergebnis.innerHTML = `<p class="ampel">Ref-Start Januar ${f.jahr + 1}</p>`
     + absaetze.map(a => `<p>${a}</p>`).join('');
   el.ergebnis.hidden = false;
 }
