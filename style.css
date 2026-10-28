@@ -1,0 +1,422 @@
+/* ===========================================================================
+   Fristenrechner Referendariat – Heidelberg School of Education
+   Stylesheet. Farben aus dem HSE-Logo abgeleitet.
+   =========================================================================== */
+
+:root {
+  /* HSE-Markenfarben (aus dem Logo) */
+  --hse-blau:       #1f3f6e;
+  --hse-blau-dunkel:#152b4c;
+  --hse-rot:        #a5202c;
+  --hse-gelb:       #f5b800;
+
+  /* Flächen & Text */
+  --bg:            #eef1f5;
+  --bg-akzent:     #e4e9f0;
+  --card:          #ffffff;
+  --text:          #16202e;
+  --muted:         #5b6475;
+  --border:        #d7dde6;
+  --border-stark:  #c3ccd8;
+
+  /* Ampel */
+  --green-bg: #e7f5ea;  --green: #1e7a35;  --green-rand: #b7e0c0;
+  --yellow-bg:#fff6e0;  --yellow:#8d6200;  --yellow-rand:#f3dca2;
+  --red-bg:   #fdeceb;  --red:   #b3261e;  --red-rand:   #f3c3c0;
+
+  /* Form */
+  --radius:    14px;
+  --radius-sm: 10px;
+  --shadow:    0 1px 2px rgba(21, 43, 76, .06), 0 8px 24px -12px rgba(21, 43, 76, .18);
+  --shadow-lg: 0 2px 4px rgba(21, 43, 76, .06), 0 20px 48px -20px rgba(21, 43, 76, .28);
+  --ring:      0 0 0 3px rgba(31, 63, 110, .22);
+  --fokus:     0 0 0 3px #fff, 0 0 0 6px var(--hse-blau);
+}
+
+* { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  color-scheme: light;                 /* Scrollbars/Inputs im Windows-Dunkelmodus */
+  touch-action: manipulation;          /* kein 300-ms-Delay durch Doppeltipp-Zoom */
+  -webkit-tap-highlight-color: rgba(31, 63, 110, .15);
+  overflow-x: hidden;
+}
+
+/* Rubber-Band nur auf Zeigergeraeten unterdruecken; auf Touch bleibt
+   Pull-to-Refresh erhalten. */
+@media (pointer: fine) {
+  html { overscroll-behavior: none; }
+}
+
+/* Sprunglink: erst sichtbar, wenn er den Fokus hat. */
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -120%);
+  z-index: 100;
+  background: var(--hse-blau);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform .15s ease-out;
+}
+.skip-link:focus-visible {
+  transform: translate(-50%, 0);
+  outline: none;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px var(--hse-blau);
+  color: #fff;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  background:
+    radial-gradient(1200px 520px at 50% -340px, #ffffff 0%, rgba(255,255,255,0) 70%),
+    linear-gradient(180deg, var(--bg-akzent) 0%, var(--bg) 340px);
+  background-attachment: fixed;
+  font: 16px/1.6 "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------------------------------------------------------------- Kopfzeile */
+
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 1px 0 rgba(21, 43, 76, .04);
+}
+
+/* Der farbige Streifen greift die drei Logofarben auf. */
+.site-header::after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--hse-rot)  0%,   var(--hse-rot)  33.33%,
+    var(--hse-gelb) 33.33%, var(--hse-gelb) 66.66%,
+    var(--hse-blau) 66.66%, var(--hse-blau) 100%
+  );
+}
+
+.site-header__inner {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 18px max(20px, env(safe-area-inset-right)) 18px max(20px, env(safe-area-inset-left));
+  display: flex;
+  align-items: center;
+}
+
+.logo { display: inline-flex; border-radius: 4px; }
+.logo:focus-visible { outline: none; box-shadow: var(--fokus); }
+
+.logo img {
+  display: block;
+  height: 46px;
+  width: auto;
+}
+
+/* ------------------------------------------------------------------- Layout */
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px max(20px, env(safe-area-inset-right)) max(72px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
+}
+
+.intro { margin-bottom: 28px; }
+
+h1 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+  line-height: 1.2;
+  margin: 0 0 10px;
+  color: var(--hse-blau-dunkel);
+  letter-spacing: -.015em;
+  text-wrap: balance;
+  scroll-margin-top: 24px;
+}
+
+.lead {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+h2 {
+  font-size: 1.12rem;
+  line-height: 1.35;
+  margin: 0 0 18px;
+  color: var(--hse-blau-dunkel);
+  letter-spacing: -.01em;
+  text-wrap: balance;
+  scroll-margin-top: 24px;
+}
+
+/* -------------------------------------------------------------------- Karte */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+/* Karte mit den errechneten Fristen: dezent hervorgehoben. */
+.card--fristen {
+  border-color: var(--border-stark);
+  box-shadow: var(--shadow-lg);
+}
+
+.card--fristen h2 { margin-bottom: 14px; }
+
+/* ----------------------------------------------------------- Formularfelder */
+
+.field { margin-bottom: 20px; }
+.field:last-child { margin-bottom: 0; }
+
+.field > label,
+legend {
+  display: block;
+  font-weight: 600;
+  font-size: .95rem;
+  margin-bottom: 8px;
+  padding: 0;
+  color: var(--text);
+}
+
+fieldset { border: 0; margin: 0 0 20px; padding: 0; }
+
+select,
+input[type="date"] {
+  width: 100%;
+  font: inherit;
+  color: var(--text);                  /* explizit, sonst Windows-Dunkelmodus */
+  background-color: #fbfcfd;
+  border: 1px solid var(--border-stark);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  transition: border-color .15s, box-shadow .15s, background-color .15s;
+}
+
+select:hover,
+input[type="date"]:hover { border-color: #a9b5c5; }
+
+select:focus-visible,
+input[type="date"]:focus-visible {
+  outline: none;
+  background: #fff;
+  border-color: var(--hse-blau);
+  box-shadow: var(--ring);
+}
+
+/* Eigener Pfeil, damit die Auswahl in allen Browsern gleich aussieht. */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 42px;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%231f3f6e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .65; }
+input[type="date"]:hover::-webkit-calendar-picker-indicator { opacity: 1; }
+
+/* ---------------------------------------------------------- Auswahlschalter */
+
+.radios { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.radios label {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 11px 16px;
+  border: 1px solid var(--border-stark);
+  border-radius: 999px;
+  background: #fbfcfd;
+  font-size: .95rem;
+  line-height: 1.2;
+  transition: border-color .15s, background-color .15s, color .15s;
+}
+
+.radios label:hover { border-color: #a9b5c5; background: #f4f7fa; }
+
+.radios input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--hse-blau);
+  cursor: pointer;
+}
+
+/* Die gewählte Option wird als Ganzes markiert. */
+.radios label:has(input:checked) {
+  border-color: var(--hse-blau);
+  background: #eef3fa;
+  color: var(--hse-blau-dunkel);
+  font-weight: 600;
+}
+
+.radios label:has(input:focus-visible) {
+  outline: none;
+  box-shadow: var(--ring);
+}
+
+/* ------------------------------------------------------------ Fristenliste */
+
+.deadlines { list-style: none; padding: 0; margin: 0; }
+
+.deadlines li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Lange Beschriftungen muessen umbrechen duerfen, nicht ueberlaufen. */
+.deadlines span { min-width: 0; overflow-wrap: break-word; }
+
+.deadlines li:first-child { padding-top: 4px; }
+.deadlines li:last-child  { border-bottom: 0; padding-bottom: 4px; }
+
+.deadlines span { color: var(--muted); font-size: .95rem; }
+
+.deadlines strong {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  color: var(--hse-blau-dunkel);
+  font-size: 1.02rem;
+}
+
+/* ------------------------------------------------------------------ Ergebnis */
+
+/* Achtung: script.js setzt className auf "gruen"/"gelb"/"rot" und überschreibt
+   dabei alle Klassen. Deshalb wird das Ergebnis ausschließlich über die ID
+   angesprochen. Keine Dauerklassen an #ergebnis vergeben! */
+#ergebnis {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  border-left-width: 5px;
+  animation: ergebnis-ein .22s ease-out;
+}
+
+#ergebnis p { margin: 0 0 10px; overflow-wrap: break-word; }
+#ergebnis p:last-child { margin-bottom: 0; }
+
+#ergebnis .ampel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: .72rem;
+  letter-spacing: .09em;
+  margin-bottom: 12px;
+}
+
+/* Der farbige Punkt vor der Überschrift. */
+#ergebnis .ampel::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+
+#ergebnis.gruen { background: var(--green-bg);  border-color: var(--green-rand);  border-left-color: var(--green);  }
+#ergebnis.gelb  { background: var(--yellow-bg); border-color: var(--yellow-rand); border-left-color: var(--yellow); }
+#ergebnis.rot   { background: var(--red-bg);    border-color: var(--red-rand);    border-left-color: var(--red);    }
+
+#ergebnis.gruen .ampel { color: var(--green);  }
+#ergebnis.gelb  .ampel { color: var(--yellow); }
+#ergebnis.rot   .ampel { color: var(--red);    }
+
+#ergebnis strong { color: var(--hse-blau-dunkel); }
+
+@keyframes ergebnis-ein {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------------------ Diverses */
+
+.hint { color: var(--muted); font-size: .9rem; margin: 12px 0 0; }
+
+.platzhalter {
+  color: var(--muted);
+  font-style: italic;
+  margin: 0;
+  padding: 18px;
+  background: #f7f9fb;
+  border: 1px dashed var(--border-stark);
+  border-radius: var(--radius-sm);
+}
+
+footer {
+  color: var(--muted);
+  font-size: .88rem;
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border);
+  max-width: 68ch;
+}
+
+a { color: var(--hse-blau); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { color: var(--hse-rot); }
+a:focus-visible { outline: none; box-shadow: var(--fokus); border-radius: 3px; }
+
+/* ------------------------------------------------------------------ Responsiv */
+
+@media (max-width: 560px) {
+  .site-header__inner { padding: 14px 16px; }
+  .logo img { height: 38px; }
+  main { padding: 28px 16px 56px; }
+  .card { padding: 20px 18px; }
+
+  .deadlines li {
+    flex-direction: column;
+    gap: 2px;
+    align-items: flex-start;
+  }
+  .radios label { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ------------------------------------------------------- Bedienungshilfen */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root { --border: #9aa5b4; --border-stark: #7b8798; --muted: #44506a; }
+}
+
+/* ----------------------------------------------------------------- Drucken */
+
+@media print {
+  body { background: #fff; }
+  .site-header { border-bottom: 2px solid var(--hse-blau); box-shadow: none; }
+  .card { box-shadow: none; border-color: #bbb; break-inside: avoid; }
+  footer { border-top-color: #bbb; }
+}
